@@ -2,11 +2,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ComposerMON</title>
+    <link rel="stylesheet" href="css/mainmenu.css">
+    <script type="text/javascript" src='js/mainmenuEventHandlers.js?v=1.0'></script>
+    <script type="text/javascript" src='js/strings.js?v=1.0'></script>
+    <title>ComposerMON Main Menu</title>
 </head>
 <body>
-    <div>
-        
+    <div class="full-container">
+        <div class="main">
+            <div class="mm-top-div"></div>
+            <div class="mm-main-div">
+                <div class="main-menu-container">
+                    <div class="main-menu-items">
+                        <h1>ComposerMON</h1>
+                        <h2 class="main-menu-button" onclick="playClicked()">PLAY!</h2>
+                        <h2 class="main-menu-button" onclick="howToPlayClicked()">How To Play</h2>
+                        <h2 class="main-menu-button" onclick="aboutClicked()">About</h2>
+                    </div>
+                </div>
+                <div class="main-menu-overlay" id="play-overlay">
+                    <!-- Server list overlay -->
+                    nyahallo
+                </div>
+                <div class="main-menu-overlay" id="howtoplay-overlay">
+                    <!-- How to play overlay -->
+                    supa miko miko time
+                </div>
+                <div class="main-menu-overlay" id="about-overlay">
+                    <!-- About page overlay -->
+                    peko
+                </div>
+            </div>
+            <div class="mm-bot-div"></div>
+        </div>
     </div>
 </body>
 </html>

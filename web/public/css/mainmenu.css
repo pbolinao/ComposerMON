@@ -1,0 +1,94 @@
+body, html {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+html {
+	height: 100%;
+	width: 1000px;
+	background-color: hsla(200,40%,30%,.4);
+	background-image:
+        url('../images/composerline1.png'),
+        url('../images/composerline2.png'),
+        url('../images/fireback.png');
+	background-repeat: repeat-x;
+	background-position: 
+		0 100%,
+		0 75%,
+		0 100%;
+	background-size: 
+		2500px,
+		2500px,
+		1000px;
+	animation: 50s para infinite linear;
+}
+
+@keyframes para {
+	100% {
+		background-position: 
+			-5000px 100%,
+			2500px 80%,
+			-1500px 100%;
+    }
+}
+
+.full-container {
+}
+
+.main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.mm-top-div {
+    height: 20vh;
+    /* background-color: black; */
+}
+.mm-bot-div {
+    height: 20vh;
+    /* background-color: black; */
+}
+.mm-main-div {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.main-menu-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.main-menu-container img {
+    width: 256px;
+    height: 256px;
+}
+
+.main-menu-items {
+    text-align: center;
+    color: blue;
+}
+
+.main-menu-items h2 {
+
+}
+.main-menu-items h2:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.main-menu-overlay {
+    height: 75vh;
+    width: 50vw;
+    display: none;
+    background-color: hotpink;
+    position: absolute;
+    left: 25%;
+	transition: all 0.75s ease-in;
+}
