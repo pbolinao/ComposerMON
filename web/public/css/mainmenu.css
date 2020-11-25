@@ -5,6 +5,8 @@ body, html {
     padding: 0;
     margin: 0;
     overflow: hidden;
+    font-family: 'Stalinist One', cursive;
+    user-select: none;
 }
 
 html {
@@ -24,19 +26,16 @@ html {
 		2500px,
 		2500px,
 		1000px;
-	animation: 50s para infinite linear;
+	animation: 50s movingBKG infinite linear;
 }
 
-@keyframes para {
+@keyframes movingBKG {
 	100% {
 		background-position: 
 			-5000px 100%,
-			2500px 80%,
-			-1500px 100%;
+			2500px 75%,
+			-1500px 70%;
     }
-}
-
-.full-container {
 }
 
 .main {
@@ -44,15 +43,10 @@ html {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
 }
-.mm-top-div {
-    height: 20vh;
-    /* background-color: black; */
-}
-.mm-bot-div {
-    height: 20vh;
-    /* background-color: black; */
+.main-menu-items h1 {
+    cursor: context-menu;
 }
 .mm-main-div {
     height: 60vh;
@@ -72,23 +66,65 @@ html {
 
 .main-menu-items {
     text-align: center;
-    color: blue;
+    color: #ffffff;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
 }
 
 .main-menu-items h2 {
 
 }
 .main-menu-items h2:hover {
-    color: white;
+    color: #e7e7e7;
     cursor: pointer;
+    -webkit-animation: glow2 1s ease-in-out infinite alternate;
+    -moz-animation: glow2 1s ease-in-out infinite alternate;
+    animation: glow2 1s ease-in-out infinite alternate;
 }
 
-.main-menu-overlay {
-    height: 75vh;
-    width: 50vw;
-    display: none;
-    background-color: hotpink;
-    position: absolute;
-    left: 25%;
-	transition: all 0.75s ease-in;
+
+@-webkit-keyframes glow {
+    from {
+      text-shadow: 0 0 20px #616161, 0 0 30px #ff00b3, 0 0 40px #e60073, 0 0 50px #e6004d, 0 0 60px #e60045;
+    }
+    
+    to {
+      text-shadow: 0 0 20px #616161, 0 0 30px #4649ff, 0 0 40px #4652ff, 0 0 50px #4649ff, 0 0 60px #4659ff;
+    }
 }
+@-webkit-keyframes glow2 {
+    from {
+      text-shadow: 0 0 20px #616161, 0 0 30px #ffee00, 0 0 40px #e6e200, 0 0 50px #e6d700, 0 0 60px #e6d700;
+    }
+    
+    to {
+      text-shadow: 0 0 20px #616161, 0 0 30px #e0ad03, 0 0 40px #e0ad03, 0 0 50px #e0ad03, 0 0 60px #e0ad03;
+    }
+}
+
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #666d72 #62696d;
+  }
+  
+  /* Works on Chrome/Edge/Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #727475;
+    border-radius: 20px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #71777a;
+    border-radius: 20px;
+    border: 3px solid #8c9092;
+  }
+  
+  @media screen and (max-width: 1024px) {
+    *::-webkit-scrollbar {
+      display: none;
+    }
+  }

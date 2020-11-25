@@ -3,37 +3,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/mainmenu.css">
+    <link rel="stylesheet" href="css/mm_overlays.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">  
+
     <script type="text/javascript" src='js/mainmenuEventHandlers.js?v=1.0'></script>
+    <script type="text/javascript" src='js/playOverlayHandlers.js?v=1.0'></script>
     <script type="text/javascript" src='js/strings.js?v=1.0'></script>
     <title>ComposerMON Main Menu</title>
 </head>
 <body>
     <div class="full-container">
         <div class="main">
-            <div class="mm-top-div"></div>
             <div class="mm-main-div">
                 <div class="main-menu-container">
-                    <div class="main-menu-items">
+                    <div class="main-menu-items" id="main-menu-items">
                         <h1>ComposerMON</h1>
                         <h2 class="main-menu-button" onclick="playClicked()">PLAY!</h2>
-                        <h2 class="main-menu-button" onclick="howToPlayClicked()">How To Play</h2>
+                        <h2 class="main-menu-button" onclick="recentClicked()">Recent Matches</h2>
                         <h2 class="main-menu-button" onclick="aboutClicked()">About</h2>
                     </div>
                 </div>
                 <div class="main-menu-overlay" id="play-overlay">
+                    <div class="close-overlay" id="play-close-overlay"> <p onclick="closeClicked()">close</p> </div>
                     <!-- Server list overlay -->
-                    nyahallo
+                    <h2 id="server-label">Server List</h2>
+                    <div id="play-cont">
+                        <div class="scrollable-list" id="server-list">
+                            <!-- This div is purely a test div -->
+                            <div class="room">
+                                <h4 class="roomName">ComposerMon room!</h4> 
+                                <p class="pass-required"><i>Password Required</i></p>
+                                <p class="roomID">Room ID: <span>1111</span></p>
+                                <p class="hostName">Host: <span>Phil</span></p>
+                            </div>
+                        </div>
+                        <div id="right-ui">
+                            <input type="text" id="join-name" placeholder="Username">
+                            <h3 class="play-overlay-btn" onclick="openCreateRoomOverlay()">Create Room</h3>
+                            <h3 class="play-overlay-btn" onclick="joinRoom()">Join Room</h3>
+                            <input type="text" id="join-password" placeholder="password">
+                        </div>
+                    </div>
+
+                    <!-- Create a room overlay -->
+                    <div id="create-room-overlay">
+                        <p id="cr-back-btn" onclick="createRoomBackBTN()">back</p>
+                        <div id="create-room-cont">
+                            <h3>Create a Room</h3>
+                            <div id="create-room-inner">
+                                <div id="create-room-main">
+                                    <div>
+                                        <label>Room Name</label>
+                                        <input type=text placeholder="Room Name" value="ComposerMON Room!" id="room-name-input">
+                                    </div>
+                                    <div>
+                                        <label>Private Room</label>
+                                        <input type="checkbox" onchange="privateRoomSelect()">
+                                    </div>
+                                    <input type="text" id="create-password" placeholder="password">
+                                    <label># of Composers</label>
+                                    <input type="range" min="1" max="6" value="3" id="composer-count-slider" oninput="composerCountSliderChange()">
+                                    <p><span id="composer-count">3</span> Composers!</p>
+                                    <h2 id="create-room-btn" onclick="createRoom()">Create Room!</h2>
+                                </div>
+                                <div id="create-room-sub">
+                                    <h3>Items</h3>
+                                    <div>
+                                        <label>Potions x<span id="pot-count">0</span></label>
+                                        <input type="range" min="0" max="10" value="0" id="pot-slider" oninput="potSliderInput()">
+                                    </div>
+                                    <div>
+                                        <label>Max Potions x<span id="mpot-count">0</span></label>
+                                        <input type="range" min="0" max="10" value="0" id="mpot-slider" oninput="mPotSliderInput()">
+                                    </div>
+                                    <div>
+                                        <label>Revives x<span id="rev-count">0</span></label>
+                                        <input type="range" min="0" max="10" value="0" id="rev-slider" oninput="revSliderInput()">
+                                    </div>
+                                    <div>
+                                        <label>Max Revives x<span id="mrev-count">0</span></label>
+                                        <input type="range" min="0" max="10" value="0" id="mrev-slider" oninput="mRevSliderInput()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Entered a room overlay -->
+                    <div id="play-room-overlay">
+                        <p id="cr-back-btn" onclick="roomBackBTN()">Leave</p>
+                        <div id="play-room-cont">
+                            <!-- Replace the room name with the actual room name -->
+                            <h3 id="play-room-name">ComposerMON Room!</h3>
+                            <div id="players">
+                                <h3>Player 1</h3>
+                                <h3>VERSUS</h3>
+                                <h3>Player 2</h3>
+                            </div>
+                            <div id="room-info">
+                                <h4>Number of Composers: <span id="room-comp-count">3</span></h4>
+                                <h4>Potions x<span id="room-comp-count">0</span></h4>
+                                <h4>Max Potions x<span id="room-comp-count">0</span></h4>
+                                <h4>Revives x<span id="room-comp-count">0</span></h4>
+                                <h4>Max Revives x<span id="room-comp-count">0</span></h4>
+                            </div>
+                            <h3 id="start-game-btn">START!</h3>
+                        </div>
+                    </div>
                 </div>
-                <div class="main-menu-overlay" id="howtoplay-overlay">
+                <div class="main-menu-overlay" id="recent-overlay">
+                    <div class="close-overlay"> <p onclick="closeClicked()">close</p> </div>
                     <!-- How to play overlay -->
-                    supa miko miko time
+                    <h2>Recent Matches</h2>
+                    <div class="scrollable-list" id="recent-cont">
+                        <!-- Get top 10 most recent game results from the server -->
+                    </div>
                 </div>
                 <div class="main-menu-overlay" id="about-overlay">
+                    <div class="close-overlay"> <p onclick="closeClicked()">close</p> </div>
                     <!-- About page overlay -->
-                    peko
+                    <div>
+                        <h1>ComposerMON!</h1>
+                        <p id="about-desc">ComposerMON is a turn based battle game that pits the 
+                            best composers against one another in a not-so-bloody battle <del>to the 
+                            death</del> till someone loses!
+                        </p>
+                        <h3>Created by:</h3>
+                    </div>
+                    <div class="about-flex">
+                        <div class="about-cont" id="james">
+                            <h2>James Pike</h2>
+                            <div>
+                                <!-- Placeholder for portfolio websites -->
+                            </div>
+                            <div>
+                                <img src="icons/github.svg">
+                                <a href="https://github.com/pike983" >Checkout James' Github!</a>
+                            </div>
+                            <div>
+                                <img src="icons/linkedin.svg">
+                                <a href="http://linkedin.com/in/james-pike-a78376118" >Connect with James</a>
+                            </div>
+                        </div>
+                        <div class="about-cont" id="philip">
+                            <h2>Philip Bolinao</h2>
+                            <div>
+                                <!-- Placeholder for portfolio websites -->
+                            </div>
+                            <div>
+                                <img src="icons/github.svg">
+                                <a href="https://github.com/pbolinao" >Checkout Philips Github!</a>
+                            </div>
+                            <div>
+                                <img src="icons/linkedin.svg">
+                                <a href="https://www.linkedin.com/in/philip-bolinao-9b6a761a6/" >Connect with Philip</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="mm-bot-div"></div>
         </div>
     </div>
 </body>

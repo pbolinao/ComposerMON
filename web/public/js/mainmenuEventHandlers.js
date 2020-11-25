@@ -1,18 +1,33 @@
 let playOverlay,
-    howToPlayOverlay,
-    aboutOverlay
+    recentOverlay,
+    aboutOverlay,
+    mmItems
+
+window.onload = function() {
+    playOverlay = document.getElementById(playOverlayID);
+    recentOverlay = document.getElementById(recentOverlayID);
+    aboutOverlay = document.getElementById(aboutOverlayID);
+    mmItems = document.getElementById(mmItemsID);
+}
 
 function playClicked() {
-    playOverlay = document.getElementById(playOverlayID);
+    mmItems.style.display = 'none';
     playOverlay.style.display = 'flex';
 }
 
-function howToPlayClicked() {
-    howToPlayOverlay = document.getElementById(howToPlayOverlayID);
-    howToPlayOverlay.style.display = 'flex';
+function recentClicked() {
+    mmItems.style.display = 'none';
+    recentOverlay.style.display = 'flex';
 }
 
 function aboutClicked() {
-    aboutOverlay = document.getElementById(aboutOverlayID);
+    mmItems.style.display = 'none';
     aboutOverlay.style.display = 'flex';
+}
+
+function closeClicked() {
+    mmItems.style.display = 'inline';
+    playOverlay.style.display = 'none';
+    recentOverlay.style.display = 'none';
+    aboutOverlay.style.display = 'none';
 }
