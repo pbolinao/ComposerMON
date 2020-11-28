@@ -40,10 +40,10 @@
                             </div>
                         </div>
                         <div id="right-ui">
-                            <input type="text" id="join-name" placeholder="Username">
+                            <input type="text" id="join-name" placeholder="Username" autocomplete="off">
                             <h3 class="play-overlay-btn" onclick="openCreateRoomOverlay()">Create Room</h3>
                             <h3 class="play-overlay-btn" onclick="joinRoom()">Join Room</h3>
-                            <input type="text" id="join-password" placeholder="password">
+                            <input type="text" id="join-password" placeholder="password" autocomplete="off">
                         </div>
                     </div>
 
@@ -56,16 +56,16 @@
                                 <div id="create-room-main">
                                     <div>
                                         <label>Room Name</label>
-                                        <input type=text placeholder="Room Name" value="ComposerMON Room!" id="room-name-input">
+                                        <input type=text placeholder="Room Name" id="room-name-input" autocomplete="off">
                                     </div>
                                     <div>
                                         <label>Private Room</label>
                                         <input type="checkbox" onchange="privateRoomSelect()">
                                     </div>
-                                    <input type="text" id="create-password" placeholder="password">
-                                    <label># of Composers</label>
-                                    <input type="range" min="1" max="6" value="3" id="composer-count-slider" oninput="composerCountSliderChange()">
-                                    <p><span id="composer-count">3</span> Composers!</p>
+                                    <input type="text" id="create-password" placeholder="password" autocomplete="off">
+                                    <!-- <label># of Composers</label>
+                                    <input type="range" min="1" max="6" value="3" id="composer-count-slider" oninput="composerCountSliderChange()"> -->
+                                    <!-- <p><span id="composer-count">3</span> Composers!</p> -->
                                     <h2 id="create-room-btn" onclick="createRoom()">Create Room!</h2>
                                 </div>
                                 <div id="create-room-sub">
@@ -103,13 +103,13 @@
                                 <h3>Player 2</h3>
                             </div>
                             <div id="room-info">
-                                <h4>Number of Composers: <span id="room-comp-count">3</span></h4>
+                                <!-- <h4>Number of Composers: <span id="room-comp-count">3</span></h4> -->
                                 <h4>Potions x<span id="room-comp-count">0</span></h4>
                                 <h4>Max Potions x<span id="room-comp-count">0</span></h4>
                                 <h4>Revives x<span id="room-comp-count">0</span></h4>
                                 <h4>Max Revives x<span id="room-comp-count">0</span></h4>
                             </div>
-                            <h3 id="start-game-btn">START!</h3>
+                            <h3 id="start-game-btn" onclick="startGame()">START!</h3>
                         </div>
                     </div>
                 </div>

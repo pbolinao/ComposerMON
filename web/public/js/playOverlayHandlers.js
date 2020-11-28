@@ -57,6 +57,16 @@ function joinRoom() {
     }
     // yikes...
 }
+
+function startGame() {
+    // check if there is a player 2 first...
+    // if not maybe have the person play a computer?
+    // get room ID and throw that on the end of the url
+    //
+    // window.location.replace('./battle/index.html'); // USE REPLACE ON THE LIVE SITE
+    window.location.assign('./battle/index.html')
+}
+
 function roomBackBTN() {
     // Gotta do a thing to actually make them leave the room on the server aswell
     document.getElementById(serverDisplayID).style.display = "flex";
@@ -68,6 +78,9 @@ function roomBackBTN() {
 function enterRoom(roomName, playerNameEntering, roomID, enteringPlayer) {
     // enteringPlayer variable will just check if they're player 1 or 2 (whether they created it or not...)
 }
+
+
+
 
 // --------------- Create a room handlers
 

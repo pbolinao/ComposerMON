@@ -1,0 +1,81 @@
+body, html {
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Stalinist One', cursive;
+    user-select: none;
+}
+
+#cs-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#composer-select-container {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-image: radial-gradient(circle at bottom, #810c0cf4 10%, #1b3e53f4);
+    text-align: center;
+}
+
+.composer-row {
+    display: flex;
+    flex-direction: row;
+}
+.composer-cell {
+    height: 18vh;
+    width: 18vh;
+    margin: 0.5em;
+}
+.composer-cell img {
+    height: 100%;
+    width: 100%;
+}
+.composer-cell:hover {
+    cursor: pointer;
+    border: 0;
+    -webkit-animation: glow-hover 0.75s ease-in-out infinite alternate;
+    -moz-animation: glow-hover 0.75s ease-in-out infinite alternate;
+    animation: glow-hover 0.75s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow-hover {
+    from {
+        box-shadow: 0 0 20px #b9b878, 0 0 30px #eeff00, 0 0 40px #e6e200, 0 0 50px #e6c400, 0 0 60px #e6d700,
+                    inset 0 0 20px #b9b878, inset 0 0 30px #eeff00, 
+                    inset 0 0 40px #e6e200, inset 0 0 50px #e6c400, 
+                    inset 0 0 60px #e6d700;
+    }
+    to {
+        box-shadow: 0 0 20px #c5a377, 0 0 30px #ff9f46, 0 0 40px #ff9f46, 0 0 50px #ffaf46, 0 0 60px #ff9046,
+                    inset 0 0 20px #c5a377, inset 0 0 30px #ff9f46, 
+                    inset 0 0 40px #ff9f46, inset 0 0 50px #ffaf46, 
+                    inset 0 0 60px #ff9046;
+    }
+}
+
+.ready-btn:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.chosen-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chosen-div {
+    height: 20vh;
+    width: 20vh;
+    border: 2px solid black;
+}
+.chosen-div img {
+    height: 100%;
+    width: 100%;
+}

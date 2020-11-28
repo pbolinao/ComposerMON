@@ -1,0 +1,204 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/battlepage.css">
+    <link rel="stylesheet" href="../css/composerselect.css">
+    <link rel="stylesheet" href="../css/endgame.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">  
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src='../js/battle.js'></script>
+    <script type="text/javascript" src='../js/battleUIHandlers.js'></script>
+    <script type="text/javascript" src='../js/composerSelect.js'></script>
+    <script type="text/javascript" src='../js/endgame.js'></script>
+
+    <title>ComposerMON!</title>
+</head>
+<body>
+    <div id="full-container">
+        <!-- COMPOSER SELECT -->
+        <div id="composer-select-container">
+            <div id="cs-container">
+                <h1>ComposerMON</h1>
+                <div id="cs-main">
+                    <div class="chosen-container" id="cs-p1-chosen">
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="p1-chosenimg-1">
+                            <p class="chosen-name" id="p1-chosen-name-1">heeee</p>
+                        </div>
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="p1-chosenimg-2">
+                            <p class="chosen-name" id="p1-chosen-name-2"></p>
+                        </div>
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="p1-chosenimg-3">
+                            <p class="chosen-name" id="p1-chosen-name-3"></p>
+                        </div>
+                        <h3 class="ready-btn" id="p1-ready-btn">READY</h3>
+                    </div>
+    
+                    <div class="composers-display">
+                        <div class="composer-row">
+                            <div class="composer-cell" id="1">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/mozart.png" alt="Amadeus Mozart">
+                            </div>
+                            <div class="composer-cell" id="2">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/beethoven.png" alt="Ludwig van Beethoven">
+                            </div>
+                            <div class="composer-cell" id="3">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/bach.png" alt="Johann Sebastian Bach">
+                            </div>
+                        </div>
+                        <div class="composer-row">
+                            <div class="composer-cell" id="4">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/brahms.png" alt="Johannes Brahms">
+                            </div>
+                            <div class="composer-cell" id="5">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/chopin.png" alt="Frederic Chopin">
+                            </div>
+                            <div class="composer-cell" id="6">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/debussy.png" alt="Claude Debussy">
+                            </div>
+                        </div>
+                        <div class="composer-row">
+                            <div class="composer-cell" id="7">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/haydn.png" alt="Franz Joseph Haydn">
+                            </div>
+                            <div class="composer-cell" id="8">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/tartini.png" alt="Giuseppe Tartini">
+                            </div>
+                            <div class="composer-cell" id="9">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/tchaikovsky.png" alt="Pyotr Ilyich Tchaikovsky">
+                            </div>
+                        </div>
+                        <div class="composer-row">
+                            <div class="composer-cell" id="10">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/trumpetboy.png" alt="Trumpet Boy">
+                            </div>
+                            <div class="composer-cell" id="11">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/vivaldi.png" alt="Antonio Vivaldi">
+                            </div>
+                            <div class="composer-cell" id="12">
+                                <img src="https://jamesp.ca/composermon/api/v1/images/wagner.png" alt="Richard Wagner">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="chosen-container" id="cs-p2-chosen">
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="p2-chosenimg-1">
+                            <p class="chosen-name" id="p2-chosen-name-1">hrrrr</p>
+                        </div>
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="p2-chosenimg-2">
+                            <p class="chosen-name" id="p2-chosen-name-2"></p>
+                        </div>
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="p2-chosenimg-3">
+                            <p class="chosen-name" id="p2-chosen-name-3"></p>
+                        </div>
+                        <h3 class="ready-btn" id="p2-ready-btn">READY</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ^^^^^^^^COMPOSER SELECT^^^^^^^^ -->
+
+        <!-- BATTLE -->
+        <div id="battle-container">
+            <div id="battleground">
+                <div class="battleground-sides" id="left">
+                    <div class="b-composermon-info" id="enemy-info">
+                        <p>Mozart</p>
+                        <p>insert healthbar lmao</p>
+                    </div>
+                    <div class="b-composer-visual" id="player-visual">
+                        <img id="player-img">
+                        insert image here (maybe a background for it too)
+                    </div>
+                </div>
+                <div class="battleground-sides" id="right">
+                    <div class="b-composer-visual" id="enemy-visual">
+                        <img id="enemy-img">
+                        insert image here (maybe a background for it too)
+                    </div>
+                    <div class="b-composermon-info" id="player-info">
+                        <p>Beethoven</p>
+                        <p>insert healthbar lmao</p>
+                    </div>
+                </div>
+            </div>
+            <div id="player-ui-container">
+                <div id="player-ui">
+                    <div id="player-left-cont">
+                        <div id="player-text-info">
+                            What will Beethoven do?
+                        </div>
+                        <div id="player-attacks">
+                            <div class="player-select">
+                                <h2 id="attack1">Attack 1</h2>
+                                <h2 id="attack2">Attack 2</h2>
+                            </div>
+                            <div class="player-select">
+                                <h2 id="attack3">Attack 3</h2>
+                                <h2 id="attack4">Attack 4</h2>
+                            </div>
+                        </div>
+                        <div id="player-bag">
+                            <h3>ITEMS:</h3>
+                            <div class="player-select">
+                                <h2 id="pot-btn">Potions x<span id="potCount">0</span></h2>
+                                <h2 id="mpot-btn">Max Potions x<span id="mpotCount">0</span></h2>
+                            </div>
+                            <div class="player-select">
+                                <h2 id="rev-btn">Revives x<span id="revCount">0</span></h2>
+                                <h2 id="mrev-btn">Max Revives x<span id="mrevCount">0</span></h2>
+                            </div>
+                        </div>
+                        <div id="player-swap-composer">
+                            Choose a ComposerMON.
+                            <h2>ComposerMON 1</h2>
+                            <h2>ComposerMON 2</h2>
+                        </div>
+                        <div id="player-quit-prompt">
+                            Are you sure you want to quit the match?
+                        </div>
+                    </div>
+                    <div id="player-right-cont">
+                        <div id="player-selection-main">
+                            <div id="player-selection-box">
+                                <div class="player-select">
+                                    <h2 id="fight-btn">Fight</h2>
+                                    <h2 id="bag-btn">Bag</h2>
+                                </div>
+                                <div class="player-select">
+                                    <h2 id="swap-btn">Composers</h2>
+                                    <h2 id="quit-btn">Quit</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="player-select-back">
+                            <h2 id="back-btn">BACK</h2>
+                        </div>
+                        <div id="player-quit-confirm">
+                            <h3>Quit?</h3>
+                            <h2 id="quit-yes">YES</h2>
+                            <h2 id="quit-no">NO</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ^^^^^^^^BATTLE^^^^^^^^ -->
+
+        <!-- END PAGE -->
+        <div id="end-container">
+
+        </div>
+        <!-- ^^^^^^^^END PAGE^^^^^^^^ -->
+    </div>
+</body>
+</html>
