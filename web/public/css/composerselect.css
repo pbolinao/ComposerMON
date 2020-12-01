@@ -8,10 +8,8 @@ body, html {
     user-select: none;
 }
 
-#cs-main {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+#composer-select-container {
+    /* display: none; */
 }
 
 #composer-select-container {
@@ -21,6 +19,12 @@ body, html {
     overflow: hidden;
     background-image: radial-gradient(circle at bottom, #810c0cf4 10%, #1b3e53f4);
     text-align: center;
+}
+
+#cs-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .composer-row {

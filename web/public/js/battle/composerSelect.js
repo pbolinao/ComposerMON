@@ -48,3 +48,7 @@ function readyHover() {
 function readyClick() {
     // onclick handler for the ready button
 }
+
+function startBattle() {
+    
+}

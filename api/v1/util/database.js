@@ -7,7 +7,7 @@ const database = "jamespca_composermon";
 // connect to a database jamespca_composermon running on the server locally
 const pool = mysql.createPool({
     host: host,
-    port: 3306,
+    port: process.env.PORT,
     user: user,
     database: database,
     password: password

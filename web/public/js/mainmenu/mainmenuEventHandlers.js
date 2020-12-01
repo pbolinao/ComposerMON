@@ -3,7 +3,7 @@ let playOverlay,
     aboutOverlay,
     mmItems
 
-window.onload = function() {
+function establishMMHandlers() {
     playOverlay = document.getElementById(playOverlayID);
     recentOverlay = document.getElementById(recentOverlayID);
     aboutOverlay = document.getElementById(aboutOverlayID);
