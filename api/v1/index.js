@@ -43,11 +43,13 @@ app.get("/attacksAndBuffs", attacksAndBuffsController.getAllAttacksAndBuffs);
 
 app.get("/items", itemsController.getAllItems);
 
-// app.get("/creatorsTeams", );
+app.get("/creatorsTeams", teamsController.getCreatorsTeams);
 
 // app.get("/currentGameState", );
 
 // app.get("/recentMatches", );
+
+app.get("/getTeams", teamsController.getAllTeams);
 
 app.get("/getRooms", roomController.getCurrentRooms);
 

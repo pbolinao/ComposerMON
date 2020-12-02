@@ -71,9 +71,9 @@ html {
     animation: glow 1s ease-in-out infinite alternate;
 }
 
-.main-menu-items h2 {
+/* .main-menu-items h2 {
 
-}
+} */
 .main-menu-items h2:hover {
     color: #e7e7e7;
     cursor: pointer;
