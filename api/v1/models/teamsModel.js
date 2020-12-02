@@ -13,7 +13,7 @@ function makeTeam(composer1, composer1Id, composer2, composer2Id, composer3, com
 
 function deleteTeam(teamId) {
     let deleteString = `DELETE FROM \`teams\` WHERE \`ID\` = ${teamId}`;
-    return db.
+    return db.execute(deleteString);
 }
 
 module.exports = {
