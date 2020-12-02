@@ -22,11 +22,22 @@ function createTeam(req, res) {
 function deleteTeam(req, res) {
     let body = req.body;
 
-    // let deleteResponse = teamsModel.
-}
+    let deleteResponse = teamsModel.deleteTeam(body.teamId);
+    deleteResponse.then(([data, meta]) => {
+        res.status(200).json(data);
+    });
+};
+
+function getCreatorsTeams() {
+    let teams = teamsModel.getCreatorsTeams();
+    teams.then(([data, meta]) => {
+        res.status(200).json(data);
+    });
+};
 
 module.exports = {
     getAllTeams: getAllTeams,
     createTeam: createTeam,
-    deleteTeam: deleteTeam
+    deleteTeam: deleteTeam,
+    getCreatorsTeams: getCreatorsTeams
 };

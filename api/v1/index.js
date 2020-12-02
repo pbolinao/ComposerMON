@@ -27,7 +27,7 @@ app.post("/createRoom", (req, res) => {
     res.send(200, roomInfo);
 }); 
 
-app.post("/createTeam", teamsController.createTeam)
+app.post("/createTeam", teamsController.createTeam);
 
 // app.post("/getEndGame", )
 
@@ -35,7 +35,7 @@ app.delete("/deleteRoom", roomController.deleteRoom);
 
 app.delete("/deleteTeam", teamsController.deleteTeam);
 
-// app.put("/makeTurn", )
+// app.put("/makeTurn", );
 
 app.get("/composers", composersController.getAllComposers);
 
@@ -43,15 +43,17 @@ app.get("/attacksAndBuffs", attacksAndBuffsController.getAllAttacksAndBuffs);
 
 app.get("/items", itemsController.getAllItems);
 
-// app.get("/creatorsTeams", )
+app.get("/creatorsTeams", teamsController.getCreatorsTeams);
 
-// app.get("/currentGameState", )
+// app.get("/currentGameState", );
 
-// app.get("/recentMatches", )
+// app.get("/recentMatches", );
+
+app.get("/getTeams", teamsController.getAllTeams);
 
 app.get("/getRooms", roomController.getCurrentRooms);
 
-app.put("/joinRoom", roomController.joinRoom)
+app.put("/joinRoom", roomController.joinRoom);
 
 app.listen(4000, () => console.log('Server ready @ port 4000'));
 
