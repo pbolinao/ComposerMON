@@ -1,4 +1,3 @@
-// const e = require("express");
 let playerName = null,
     reqPassword = false,
     // compCount = 3,
@@ -38,9 +37,10 @@ function createRoom() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(roomInfo)
-        }).then(response => {
-            // Response is the final room info with the room ID included 
-            joinRoom(response, true);
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data);
+            joinRoom(data, true);
         }).catch(e => {
             console.log(e)
             window.alert("An error on the server has occurred. Please try creating the room again.")
@@ -48,8 +48,8 @@ function createRoom() {
 
     } else {
         window.alert("The room needs a name!");
-    }
-}
+    };
+};
 
 function startGame() {
     // check if there is a player 2 first...
@@ -83,20 +83,30 @@ function joinRoom(roomInfo, host) {
         document.getElementById(serverDisplayID).style.display = "none";
         document.getElementById(serverLabelID).style.display = "none";
         document.getElementById(playCloseOverlayID).style.display = "none";
+        document.getElementById(createRoomOverlayID).style.display = "none";
         document.getElementById(roomOverlayID).style.display = "flex";
 
+        // populate fields
+        document.getElementById("play-room-name").innerHTML = roomInfo.roomName;
+        document.getElementById("p1-username").innerHTML = roomInfo.host;
+        document.getElementById("room-pot-count").innerHTML = roomInfo.potCount;
+        document.getElementById("room-mpot-count").innerHTML = roomInfo.mPotCount;
+        document.getElementById("room-rev-count").innerHTML = roomInfo.revCount;
+        document.getElementById("room-mrev-count").innerHTML = roomInfo.mRevCount;
+        let startGameBTN = document.getElementById("start-game-btn");
+
+        if (host) {
+            // unlock button (set on click)
+            startGameBTN.addEventListener("click", startGame);
+        } else {
+            // lock start button
+            startGameBTN.style.color = "#7a7a7a";
+        }
 
     } else {
         window.alert("Please enter a username!");
     }
-    // yikes...
 }
-
-function enterRoom(roomName, playerNameEntering, roomID, enteringPlayer) {
-    // enteringPlayer variable will just check if they're player 1 or 2 (whether they created it or not...)
-}
-
-
 
 
 // --------------- Create a room handlers

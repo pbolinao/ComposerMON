@@ -1,4 +1,6 @@
 let express = require('express');
+let https = require('https');
+let cors = require('cors')
 let app = express();
 let jwt = require('jsonwebtoken');
 let WebSocket = require('ws');
@@ -9,22 +11,22 @@ let attacksAndBuffsController = require('./controllers/attacksBuffsController');
 let itemsController = require('./controllers/itemsController');
 let roomController = require('./controllers/roomController');
 let teamsController = require('./controllers/teamsController');
+let gameController = require('./controllers/gameController');
 
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server }); 
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(bodyParser.json());
 
 app.post("/createRoom", (req, res) => {
-    let roomInfo = roomController.createRoom(req);
+    let roomInfo = JSON.stringify(roomController.createRoom(req));
     wss.clients.forEach((client) => {
         if (client.readyState === WebSocket.OPEN) {
-          client.send(roomInfo);
+          client.send("1" + roomInfo);
         }
     });
-    res.send(200, roomInfo);
+    console.log("New Room: " + roomInfo);
+    res.status(200).send(roomInfo);
 });
 
 app.post("/createTeam", teamsController.createTeam);
@@ -47,7 +49,7 @@ app.get("/creatorsTeams", teamsController.getCreatorsTeams);
 
 // app.get("/currentGameState", );
 
-// app.get("/recentMatches", );
+app.get("/recentMatches", gameController.getRecentMatches);
 
 app.get("/getTeams", teamsController.getAllTeams);
 
@@ -61,6 +63,9 @@ app.listen(4000, () => console.log('Server ready @ port 4000'));
 
 
 // --------------- Create WebSocket connection.
+
+const server = https.createServer(app);
+const wss = new WebSocket.Server({ port: 8082 }); 
 
 wss.on("connection", ws => {
     console.log("New client connected!");
