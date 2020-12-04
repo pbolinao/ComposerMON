@@ -1,38 +1,79 @@
 let teamsModel = require("../models/teamsModel");
 
 function getAllTeams(req, res) {
-    let teams = teamsModel.getTeams();
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
+        jwt.verify(req.headers.authorization.split(' ')[1], "DSAFFA$W#FA$F%@143fWEf3f", (err, decode) => {
+            if (err) {
+                return res.status(401).json({message: 'Unauthorized user'});
+            } else {
+                let teams = teamsModel.getTeams();
 
-    teams.then( ([data, meta]) => {
-        res.status(200).json(data);
-    });
+                teams.then( ([data, meta]) => {
+                    res.status(200).json(data);
+                });
+            };
+        });
+    } else {
+        return res.status(401).json({message: 'Unauthorized user'});
+    };
 };
 
 function createTeam(req, res) {
-    let body = req.body;
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
+        jwt.verify(req.headers.authorization.split(' ')[1], "DSAFFA$W#FA$F%@143fWEf3f", (err, decode) => {
+            if (err) {
+                return res.status(401).json({message: 'Unauthorized user'});
+            } else {
+                let body = req.body;
 
-    let createResponse = teamsModel.makeTeam(body.composer1, body.composer1Id,
-        body.composer2, body.compoer2Id, body.composer3, body.composer3Id);
-    
-    createResponse.then(([data, meta]) => {
-        res.status(200).json(data);
-    });
+                let createResponse = teamsModel.makeTeam(body.composer1, body.composer1Id,
+                    body.composer2, body.compoer2Id, body.composer3, body.composer3Id);
+                
+                createResponse.then(([data, meta]) => {
+                    res.status(200).json(data);
+                });
+            };
+        });
+    } else {
+        return res.status(401).json({message: 'Unauthorized user'});
+    };
 };
 
 function deleteTeam(req, res) {
-    let body = req.body;
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
+        jwt.verify(req.headers.authorization.split(' ')[1], "DSAFFA$W#FA$F%@143fWEf3f", (err, decode) => {
+            if (err) {
+                return res.status(401).json({message: 'Unauthorized user'});
+            } else {
+                let body = req.body;
 
-    let deleteResponse = teamsModel.deleteTeam(body.teamId);
-    deleteResponse.then(([data, meta]) => {
-        res.status(200).json(data);
-    });
+                let deleteResponse = teamsModel.deleteTeam(body.teamId);
+                deleteResponse.then(([data, meta]) => {
+                    res.status(200).json(data);
+                });
+            };
+        });
+    } else {
+        return res.status(401).json({message: 'Unauthorized user'});
+    };
 };
 
 function getCreatorsTeams() {
-    let teams = teamsModel.getCreatorsTeams();
-    teams.then(([data, meta]) => {
-        res.status(200).json(data);
-    });
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
+        jwt.verify(req.headers.authorization.split(' ')[1], "DSAFFA$W#FA$F%@143fWEf3f", (err, decode) => {
+            if (err) {
+                return res.status(401).json({message: 'Unauthorized user'});
+            } else {
+                let teams = teamsModel.getCreatorsTeams();
+                teams.then(([data, meta]) => {
+                    res.status(200).json(data);
+                });
+            };
+        });
+    } else {
+        return res.status(401).json({message: 'Unauthorized user'});
+    };
+    
 };
 
 module.exports = {

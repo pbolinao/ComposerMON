@@ -79,8 +79,13 @@ input:focus {
     margin: 0 auto;
 }
 
+.roomID {
+    display: none;
+    visibility: hidden;
+}
+
 .selected-room {
-    background-color: #7c797bde;
+    background-color: #cfcbcede;
 }
 
 /* SERVER ITEM STYLING END */
