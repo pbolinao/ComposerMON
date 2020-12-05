@@ -1,9 +1,13 @@
 let numComp = 3;
 
 let selectImageIDList,
+    bsImageIDList1,
     selectNameIDList,
+    bsNameIDList1,
     enemyImageIDs,
+    bsImageIDList2,
     enemyNameIDs,
+    bsNameIDList2,
     currentlySelected = [false, false, false],
     current = 0,
     ourReadyButton,
@@ -18,8 +22,19 @@ function setupComposerSelect() {
     if (player == 1) {
         selectImageIDList = ['p1-chosenimg-1', 'p1-chosenimg-2', 'p1-chosenimg-3'];
         selectNameIDList = ['p1-chosen-name-1', 'p1-chosen-name-2', 'p1-chosen-name-3'];
+        bsImageIDList1 = ['bs-p1-img-1', 'bs-p1-img-2', 'bs-p1-img-3'];
+        bsNameIDList1 = ['bs-p1-name-1', 'bs-p1-name-2', 'bs-p1-name-3'];
+    
         enemyImageIDs = ['p2-chosenimg-1', 'p2-chosenimg-2', 'p2-chosenimg-3'];
         enemyNameIDs = ['p2-chosen-name-1', 'p2-chosen-name-2', 'p2-chosen-name-3'];
+        bsImageIDList2 = ['bs-p2-img-1', 'bs-p2-img-2', 'bs-p2-img-3'];
+        bsNameIDList2 = ['bs-p2-name-1', 'bs-p2-name-2', 'bs-p2-name-3']
+        document.getElementById('cs-p2-chosen').style.pointerEvents = 'none';
+
+        document.getElementById('p1-player-name').innerHTML = playerName;
+        document.getElementById('bs-p1-name').innerHTML = playerName;
+        document.getElementById('p2-player-name').innerHTML = enemyName;
+        document.getElementById('bs-p2-name').innerHTML = enemyName;
         
         selectionBoxes = document.querySelectorAll('#cs-p1-chosen .chosen-div');
 
@@ -31,8 +46,19 @@ function setupComposerSelect() {
     } else if (player == 2) {
         selectImageIDList = ['p2-chosenimg-1', 'p2-chosenimg-2', 'p2-chosenimg-3'];
         selectNameIDList = ['p2-chosen-name-1', 'p2-chosen-name-2', 'p2-chosen-name-3'];
+        bsImageIDList1 = ['bs-p2-img-1', 'bs-p2-img-2', 'bs-p2-img-3'];
+        bsNameIDList1 = ['bs-p2-name-1', 'bs-p2-name-2', 'bs-p2-name-3']
+
         enemyImageIDs = ['p1-chosenimg-1', 'p1-chosenimg-2', 'p1-chosenimg-3'];
         enemyNameIDs = ['p1-chosen-name-1', 'p1-chosen-name-2', 'p1-chosen-name-3'];
+        bsImageIDList2 = ['bs-p1-img-1', 'bs-p1-img-2', 'bs-p1-img-3'];
+        bsNameIDList2 = ['bs-p1-name-1', 'bs-p1-name-2', 'bs-p1-name-3'];
+        document.getElementById('cs-p1-chosen').style.pointerEvents = 'none';
+
+        document.getElementById('p1-player-name').innerHTML = enemyName;
+        document.getElementById('bs-p1-name').innerHTML = enemyName;
+        document.getElementById('p2-player-name').innerHTML = playerName;
+        document.getElementById('bs-p2-name').innerHTML = playerName;
 
         selectionBoxes = document.querySelectorAll('#cs-p2-chosen .chosen-div');
         
@@ -41,20 +67,7 @@ function setupComposerSelect() {
         theirReadyButton = document.getElementById('p1-ready-btn');
         theirTeamDiv = document.getElementById('cs-p1-chosen');
         theirReadyButton.style.pointerEvents = 'none';
-    } else { // ONLY FOR TESTING PURPOSES... REMOVE LATER
-        selectImageIDList = ['p1-chosenimg-1', 'p1-chosenimg-2', 'p1-chosenimg-3'];
-        selectNameIDList = ['p1-chosen-name-1', 'p1-chosen-name-2', 'p1-chosen-name-3'];
-        enemyImageIDs = ['p2-chosenimg-1', 'p2-chosenimg-2', 'p2-chosenimg-3'];
-        enemyNameIDs = ['p2-chosen-name-1', 'p2-chosen-name-2', 'p2-chosen-name-3'];
-
-        selectionBoxes = document.querySelectorAll('#cs-p1-chosen .chosen-div');
-
-        ourReadyButton = document.getElementById('p1-ready-btn');
-        ourTeamDiv = document.getElementById('cs-p1-chosen');
-        theirReadyButton = document.getElementById('p2-ready-btn');
-        theirTeamDiv = document.getElementById('cs-p2-chosen');
-        theirReadyButton.style.pointerEvents = 'none';
-    }
+    } 
 
     for (let i = 0; i < 3; i++) {
         selectionBox = selectionBoxes[i];
@@ -102,7 +115,9 @@ function composerSelect(clickID) {
         nameID = selectNameIDList[current];
         let composer = document.getElementById(clickID);
         document.getElementById(imgID).src = composer.querySelector("img").src;
+        document.getElementById(bsImageIDList1[current]).src = composer.querySelector("img").src;
         document.getElementById(nameID).innerHTML = composer.querySelector("img").alt;
+        document.getElementById(bsNameIDList1[current]).innerHTML = composer.querySelector("img").alt;
         currentlySelected[current] = true;
         composerTeamIDs[current] = clickID;
         composerTeamNames[current] = composer.querySelector("img").alt;

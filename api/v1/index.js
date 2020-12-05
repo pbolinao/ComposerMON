@@ -212,7 +212,7 @@ wss.on("connection", ws => {
             let roomINFO = currentRooms[hostedRoomID];
             wss.clients.forEach((client) => {
                 if (client.readyState === WebSocket.OPEN) {
-                    client.send("z" + JSON.stringify(roomINFO));
+                    client.send("x" + JSON.stringify(roomINFO));
                 }
             });
             roomController.deleteRoomNoRes(hostedRoomID);

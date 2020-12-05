@@ -63,11 +63,14 @@ ws.addEventListener("message", message => {
         getNewRoom(roomInfo);
     } else if (msg == 'room-created') {
         localStorage.setItem('player', 1);
+        localStorage.setItem('p1-name', roomInfo.host);
     } else if (indicator == '2') { // Player joined room, update text
         msg = msg.substring(1);
         console.log(msg);
         roomInfo = JSON.parse(msg);
         joinRoomOverlay(roomInfo);
+        localStorage.setItem('p1-name', roomInfo.host);
+        localStorage.setItem('p2-name', roomInfo.player2);
         if (localStorage.getItem('player') == 0) {
             localStorage.setItem('player', 2);
         }

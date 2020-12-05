@@ -9,18 +9,21 @@ body, html {
 }
 
 #composer-select-container {
-    /* display: none; */
-}
-
-#composer-select-container {
     margin: 0;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
     background-image: radial-gradient(circle at bottom, #810c0cf4 10%, #1b3e53f4);
     text-align: center;
+    opacity: 1;
+    -webkit-transition: opacity 0.75s linear;
+    transition: opacity 0.75s linear;
 }
-
+#cs-container {
+    opacity: 1;
+    -webkit-transition: opacity 1s linear;
+    transition: opacity 1s linear;
+}
 #cs-main {
     display: flex;
     flex-direction: row;
@@ -92,4 +95,56 @@ body, html {
 .chosen-div p {
     margin: 0 auto;
     font-size: 8pt;
+}
+
+#battle-start-page {
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0 3vw;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+#battle-start-page h1 {
+    margin: auto;
+}
+
+.bs-team-cont {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.bs-team-cont h1 {
+    margin: 0 !important;
+}
+#bs-p1-container h1 {
+    color: red;
+    text-align: left;
+}
+#bs-p2-container h1 {
+    color: blue;
+    text-align: right;
+}
+#bs-p1-container {
+    transform: scale(0);
+    transition: all 0.75s ease;
+}
+#bs-p2-container {
+    transform: scale(0);
+    transition: all 0.75s ease;
+}
+#versus-div {
+    transform: scale(0);
+    transition: all 0.4s ease;
+}
+.bs-chosen-cont {
+    display: flex;
+    flex-direction: row;
+}
+#bs-chosen-p1 {
+    justify-content: flex-start;
+}
+#bs-chosen-p2 {
+    justify-content: flex-end;
 }

@@ -26,6 +26,7 @@
                 <h1>ComposerMON</h1>
                 <div id="cs-main">
                     <div class="chosen-container" id="cs-p1-chosen">
+                        <h3 id="p1-player-name"></h3>
                         <div class="chosen-div">
                             <img class="chosen-img" id="p1-chosenimg-1" src="../images/empty.png">
                             <p class="chosen-name" id="p1-chosen-name-1">--</p>
@@ -89,6 +90,7 @@
                     </div>
     
                     <div class="chosen-container" id="cs-p2-chosen">
+                        <h3 id="p2-player-name"></h3>
                         <div class="chosen-div">
                             <img class="chosen-img" id="p2-chosenimg-1" src="../images/empty.png">
                             <p class="chosen-name" id="p2-chosen-name-1">--</p>
@@ -109,6 +111,46 @@
                 <input type="button" value="CREATORS PICK 3" class="creators-pick-btn" >
                 <input type="button" value="CREATORS PICK 4" class="creators-pick-btn" >
             </div>
+            <div id="battle-start-page">
+                <h1>ComposerMON</h1>
+                <div class="bs-team-cont" id="bs-p1-container">
+                    <h1 id="bs-p1-name"></h1>
+                    <div class="bs-chosen-cont" id="bs-chosen-p1">
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="bs-p1-img-1" src="../images/empty.png">
+                            <p class="chosen-name" id="bs-p1-name-1">--</p>
+                        </div>
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="bs-p1-img-2" src="../images/empty.png">
+                            <p class="chosen-name" id="bs-p1-name-2">--</p>
+                        </div>
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="bs-p1-img-3" src="../images/empty.png">
+                            <p class="chosen-name" id="bs-p1-name-3">--</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="versus-div">
+                    <img src="../images/versus.png" alt="VERSUS!">
+                </div>
+                <div class="bs-team-cont" id="bs-p2-container">
+                    <h1 id="bs-p2-name"></h1>
+                    <div class="bs-chosen-cont" id="bs-chosen-p2">
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="bs-p2-img-1" src="../images/empty.png">
+                            <p class="chosen-name" id="bs-p2-name-1">--</p>
+                        </div>
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="bs-p2-img-2" src="../images/empty.png">
+                            <p class="chosen-name" id="bs-p2-name-2">--</p>
+                        </div>
+                        <div class="chosen-div">
+                            <img class="chosen-img" id="bs-p2-img-3" src="../images/empty.png">
+                            <p class="chosen-name" id="bs-p2-name-3">--</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- ^^^^^^^^COMPOSER SELECT^^^^^^^^ -->
 
@@ -117,22 +159,24 @@
             <div id="battleground">
                 <div class="battleground-sides" id="left">
                     <div class="b-composermon-info" id="enemy-info">
-                        <p>Mozart</p>
-                        <p>insert healthbar lmao</p>
+                        <p id="b-enemy-composermon">Mozart</p>
+                        <div>
+                            <progress id="b-enemy-hp" value="100" max="100"></progress>
+                        </div>
                     </div>
                     <div class="b-composer-visual" id="player-visual">
                         <img id="player-img">
-                        insert image here (maybe a background for it too)
                     </div>
                 </div>
                 <div class="battleground-sides" id="right">
                     <div class="b-composer-visual" id="enemy-visual">
                         <img id="enemy-img">
-                        insert image here (maybe a background for it too)
                     </div>
                     <div class="b-composermon-info" id="player-info">
-                        <p>Beethoven</p>
-                        <p>insert healthbar lmao</p>
+                        <p id="b-our-composermon">Beethoven</p>
+                        <div>
+                            <progress id="b-our-hp" value="100" max="100"></progress>
+                        </div>
                     </div>
                 </div>
             </div>

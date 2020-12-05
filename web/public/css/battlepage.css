@@ -7,6 +7,34 @@
     width: 100vw;
     overflow: hidden;
     font-family: 'Orbitron', sans-serif;
+    opacity: 0;
+    transition: all 0.5s linear;
+}
+progress { /* progress bar */
+    width: 80%;
+    height: 1.25em;
+    border: 2px solid black;
+    border-radius: 16px;
+  }
+  progress::-webkit-progress-bar { /* progress bar */
+    border-radius: 16px;
+  }
+  progress::-webkit-progress-value { /* progress bar VALUE */
+    color: green;
+    border-radius: 8px;
+  }
+  progress::-moz-progress-bar { /* progress bar VALUE (firefox) */
+    color: green;
+    border-radius: 8px;
+  }
+progress {
+}
+.b-composermon-info div {
+    width: 100%;
+    text-align: center;
+}
+#b-enemy-composermon, #b-our-composermon {
+    margin-bottom: 0;
 }
 
 #battleground {
@@ -48,7 +76,7 @@
     width: 95%;
 }
 .b-composermon-info p {
-    margin: 1.25em 2em;
+    margin: 0.75em 2em;
 }
 
 .b-composer-visual {
