@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
 
+    <script type="text/javascript" src='../js/battle/battle-page.js'></script>
     <script type="text/javascript" src='../js/battle/battle.js'></script>
     <script type="text/javascript" src='../js/battle/battleUIHandlers.js'></script>
     <script type="text/javascript" src='../js/battle/composerSelect.js'></script>
@@ -26,18 +27,18 @@
                 <div id="cs-main">
                     <div class="chosen-container" id="cs-p1-chosen">
                         <div class="chosen-div">
-                            <img class="chosen-img" id="p1-chosenimg-1">
-                            <p class="chosen-name" id="p1-chosen-name-1">heeee</p>
+                            <img class="chosen-img" id="p1-chosenimg-1" src="../images/empty.png">
+                            <p class="chosen-name" id="p1-chosen-name-1">--</p>
                         </div>
                         <div class="chosen-div">
-                            <img class="chosen-img" id="p1-chosenimg-2">
-                            <p class="chosen-name" id="p1-chosen-name-2"></p>
+                            <img class="chosen-img" id="p1-chosenimg-2" src="../images/empty.png">
+                            <p class="chosen-name" id="p1-chosen-name-2">--</p>
                         </div>
                         <div class="chosen-div">
-                            <img class="chosen-img" id="p1-chosenimg-3">
-                            <p class="chosen-name" id="p1-chosen-name-3"></p>
+                            <img class="chosen-img" id="p1-chosenimg-3" src="../images/empty.png">
+                            <p class="chosen-name" id="p1-chosen-name-3">--</p>
                         </div>
-                        <h3 class="ready-btn" id="p1-ready-btn">READY</h3>
+                        <h3 class="ready-btn" id="p1-ready-btn" onclick="readyClick()">READY</h3>
                     </div>
     
                     <div class="composers-display">
@@ -89,20 +90,24 @@
     
                     <div class="chosen-container" id="cs-p2-chosen">
                         <div class="chosen-div">
-                            <img class="chosen-img" id="p2-chosenimg-1">
-                            <p class="chosen-name" id="p2-chosen-name-1">hrrrr</p>
+                            <img class="chosen-img" id="p2-chosenimg-1" src="../images/empty.png">
+                            <p class="chosen-name" id="p2-chosen-name-1">--</p>
                         </div>
                         <div class="chosen-div">
-                            <img class="chosen-img" id="p2-chosenimg-2">
-                            <p class="chosen-name" id="p2-chosen-name-2"></p>
+                            <img class="chosen-img" id="p2-chosenimg-2" src="../images/empty.png">
+                            <p class="chosen-name" id="p2-chosen-name-2">--</p>
                         </div>
                         <div class="chosen-div">
-                            <img class="chosen-img" id="p2-chosenimg-3">
-                            <p class="chosen-name" id="p2-chosen-name-3"></p>
+                            <img class="chosen-img" id="p2-chosenimg-3" src="../images/empty.png">
+                            <p class="chosen-name" id="p2-chosen-name-3">--</p>
                         </div>
-                        <h3 class="ready-btn" id="p2-ready-btn">READY</h3>
+                        <h3 class="ready-btn" id="p2-ready-btn" onclick="readyClick()">READY</h3>
                     </div>
                 </div>
+                <input type="button" value="CREATORS PICK 1" class="creators-pick-btn" >
+                <input type="button" value="CREATORS PICK 2" class="creators-pick-btn" >
+                <input type="button" value="CREATORS PICK 3" class="creators-pick-btn" >
+                <input type="button" value="CREATORS PICK 4" class="creators-pick-btn" >
             </div>
         </div>
         <!-- ^^^^^^^^COMPOSER SELECT^^^^^^^^ -->

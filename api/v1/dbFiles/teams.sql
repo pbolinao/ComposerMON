@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS teams (
-    `ID` INT Primary Key,
+    `ID` VARCHAR(255),
     `Creators_Team` TINYINT,
     `Composer_1` VARCHAR(255) CHARACTER SET utf8,
     `Composer_1_ID` INT,

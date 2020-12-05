@@ -34,7 +34,8 @@ function createRoom() {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'authorization': 'JWT '+ window.localStorage.getItem('token')
             },
             body: JSON.stringify(roomInfo)
         }).then(response => response.json())
@@ -58,13 +59,17 @@ function createRoom() {
 };
 
 function startGame() {
+    ws.send(JSON.stringify({
+        meta: 'start',
+        room: currentRoomToJoin.roomID
+    }));
     // check if there is a player 2 first...
     // if not maybe have the person play a computer?
     // somehow check if the user is the host lol 
     // (maybe store the host name in the room lol or lock the button if they joined from main menu and not create)
     // somehow gotta get the specific player to also be pushed towards the game........
     // window.location.replace('./battle/index.html'); // USE REPLACE ON THE LIVE SITE (replace has no history)
-    window.location.assign('./battle/index.html')
+    // window.location.assign('./battle/index.html') // USE THIS ON mainmenu.js
 }
 
 // ------- ROOM CREATED STUFF ^^^^^
@@ -77,7 +82,7 @@ function hostCreatedJoin(roomInfo) {
         // JOIN THE ROOM IN THE SERVER if it's a success then do the next stuff
         // if (host) then unlock the start button, OTHERWISE lock it!! maybe even remove the event listener lmao
     let playernameText = document.getElementById('join-name').value;
-    currentRoomToJoin = roomInfo
+    currentRoomToJoin = roomInfo;
     if (playernameText) {
         playerName = playernameText;
         document.getElementById(serverDisplayID).style.display = "none";
@@ -88,12 +93,16 @@ function hostCreatedJoin(roomInfo) {
 
         // populate fields
         document.getElementById("play-room-name").innerHTML = roomInfo.roomName;
-        document.getElementById("p1-username").innerHTML = roomInfo.host;
+        let p1User = document.getElementById("p1-username")
+        p1User.innerHTML = roomInfo.host;
+        p1User.style.color = "#ff0000";
         document.getElementById("room-pot-count").innerHTML = roomInfo.potCount;
         document.getElementById("room-mpot-count").innerHTML = roomInfo.mPotCount;
         document.getElementById("room-rev-count").innerHTML = roomInfo.revCount;
         document.getElementById("room-mrev-count").innerHTML = roomInfo.mRevCount;
         let startGameBTN = document.getElementById("start-game-btn");
+        startGameBTN.style.color = "#000000";
+        startGameBTN.style.pointerEvents = "auto";
         startGameBTN.addEventListener("click", startGame);
 
     } else {
@@ -107,9 +116,7 @@ function setRoomToJoin(roomID) {
     for (let i = 0; i < selectedToClear.length; i++) {
         selectedToClear[i].classList.remove('selected-room');
     }
-
     document.getElementById(roomID).classList.add('selected-room');
-
     // set currentRoomToJoin (get the room info from the server)
     console.log(currentRooms[roomID])
     console.log(roomID);
@@ -119,7 +126,6 @@ function setRoomToJoin(roomID) {
 function joinRoom() {
     // check if currentRoomToJoin is null
     // check if password required from currentRoomToJoin
-    // 
     if (currentRoomToJoin != null) {
         if (currentRoomToJoin.password != null) { // PASSWORD REQUIRED
             let joinPassword = document.getElementById('join-password').value;
@@ -132,25 +138,10 @@ function joinRoom() {
         let playernameText = document.getElementById('join-name').value;
         if (playernameText) {
             playerName = playernameText;
-            document.getElementById(serverDisplayID).style.display = "none";
-            document.getElementById(serverLabelID).style.display = "none";
-            document.getElementById(playCloseOverlayID).style.display = "none";
-            document.getElementById(createRoomOverlayID).style.display = "none";
-            document.getElementById(roomOverlayID).style.display = "flex";
-
-            // populate fields
-            document.getElementById("play-room-name").innerHTML = currentRoomToJoin.roomName;
-            document.getElementById("p1-username").innerHTML = currentRoomToJoin.host;
-            document.getElementById("p1-username").innerHTML = playernameText;
-            document.getElementById("room-pot-count").innerHTML = currentRoomToJoin.potCount;
-            document.getElementById("room-mpot-count").innerHTML = currentRoomToJoin.mPotCount;
-            document.getElementById("room-rev-count").innerHTML = currentRoomToJoin.revCount;
-            document.getElementById("room-mrev-count").innerHTML = currentRoomToJoin.mRevCount;
-            document.getElementById("start-game-btn").style.color = "#949093de";
-
             ws.send(JSON.stringify({
                 meta: 'join',
-                room: currentRoomToJoin.roomID
+                room: currentRoomToJoin.roomID,
+                name: playerName
             }));
         } else {
             window.alert("Please enter a username!");
@@ -166,10 +157,6 @@ function leaveRoom() {
         room: currentRoomToJoin.roomID
     }));
 
-    document.getElementById(serverDisplayID).style.display = "flex";
-    document.getElementById(serverLabelID).style.display = "inline";
-    document.getElementById(playCloseOverlayID).style.display = "inline";
-    document.getElementById(roomOverlayID).style.display = "none";
 }
 
 

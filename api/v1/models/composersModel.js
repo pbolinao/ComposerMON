@@ -1,7 +1,7 @@
 let db = require("../util/database");
 
 function getComposers() {
-    return db.execute("SELECT * FROM `composers`");
+    return db.execute("SELECT * FROM `composers`;");
 };
 
 module.exports = {

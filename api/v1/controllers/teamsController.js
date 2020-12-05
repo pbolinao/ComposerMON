@@ -1,4 +1,5 @@
 let teamsModel = require("../models/teamsModel");
+let jwt = require('jsonwebtoken');
 
 function getAllTeams(req, res) {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
@@ -7,7 +8,6 @@ function getAllTeams(req, res) {
                 return res.status(401).json({message: 'Unauthorized user'});
             } else {
                 let teams = teamsModel.getTeams();
-
                 teams.then( ([data, meta]) => {
                     res.status(200).json(data);
                 });
@@ -26,11 +26,15 @@ function createTeam(req, res) {
             } else {
                 let body = req.body;
 
-                let createResponse = teamsModel.makeTeam(body.composer1, body.composer1Id,
-                    body.composer2, body.compoer2Id, body.composer3, body.composer3Id);
+                let createResponse = teamsModel.makeTeam(
+                    body.teamID, 
+                    body.composer1, body.composer1Id,
+                    body.composer2, body.composer2Id,
+                    body.composer3, body.composer3Id
+                );
                 
                 createResponse.then(([data, meta]) => {
-                    res.status(200).json(data);
+                    res.status(201).json(data);
                 });
             };
         });

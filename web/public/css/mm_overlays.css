@@ -129,6 +129,10 @@ input:focus {
     flex-direction: row;
     justify-content: space-evenly;
 }
+#start-game-btn {
+    color: #949093de;
+    pointer-events: none;
+}
 #start-game-btn:hover {
     cursor: pointer;
     color: white;

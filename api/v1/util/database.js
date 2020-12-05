@@ -8,9 +8,11 @@ const database = "jamespca_composermon";
 const pool = mysql.createPool({
     host: host,
     port: process.env.PORT,
-    user: user,
+    // user: user,
+    user: "root",
     database: database,
-    password: password
+    // password: password
+    password: ""
 });
 
 module.exports = pool.promise();
