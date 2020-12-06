@@ -159,23 +159,23 @@
             <div id="battleground">
                 <div class="battleground-sides" id="left">
                     <div class="b-composermon-info" id="enemy-info">
-                        <p id="b-enemy-composermon">Mozart</p>
+                        <p id="b-enemy-composermon">--</p>
                         <div>
                             <progress id="b-enemy-hp" value="100" max="100"></progress>
                         </div>
                     </div>
                     <div class="b-composer-visual" id="player-visual">
-                        <img id="player-img">
+                        <img class="battle-img" id="player-img">
                     </div>
                 </div>
                 <div class="battleground-sides" id="right">
                     <div class="b-composer-visual" id="enemy-visual">
-                        <img id="enemy-img">
+                        <img class="battle-img" id="enemy-img">
                     </div>
                     <div class="b-composermon-info" id="player-info">
-                        <p id="b-our-composermon">Beethoven</p>
+                        <p id="b-player-composermon">--</p>
                         <div>
-                            <progress id="b-our-hp" value="100" max="100"></progress>
+                            <progress id="b-player-hp" value="100" max="100"></progress>
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                 <div id="player-ui">
                     <div id="player-left-cont">
                         <div id="player-text-info">
-                            What will Beethoven do?
+                            --
                         </div>
                         <div id="player-attacks">
                             <div class="player-select">
@@ -202,15 +202,15 @@
                                 <h2 id="pot-btn">Potions x<span id="potCount">0</span></h2>
                                 <h2 id="mpot-btn">Max Potions x<span id="mpotCount">0</span></h2>
                             </div>
-                            <div class="player-select">
+                            <!-- <div class="player-select">
                                 <h2 id="rev-btn">Revives x<span id="revCount">0</span></h2>
                                 <h2 id="mrev-btn">Max Revives x<span id="mrevCount">0</span></h2>
-                            </div>
+                            </div> -->
                         </div>
                         <div id="player-swap-composer">
-                            Choose a ComposerMON.
-                            <h2>ComposerMON 1</h2>
-                            <h2>ComposerMON 2</h2>
+                            <h3 id="composer1">ComposerMON 1</h3>
+                            <h3 id="composer2">ComposerMON 2</h3>
+                            <h3 id="composer3">ComposerMON 3</h3>
                         </div>
                         <div id="player-quit-prompt">
                             Are you sure you want to quit the match?
@@ -245,7 +245,12 @@
 
         <!-- END PAGE -->
         <div id="end-container">
-
+            <div>
+                <h1>ComposerMON</h1>
+                <h2 id="end-short-message"></h2>
+                <h3 id="end-long-message"></h3>
+                <h3 id="home-btn" onclick="backToMainMenu()">Return to Home</h3>
+            </div>
         </div>
         <!-- ^^^^^^^^END PAGE^^^^^^^^ -->
     </div>

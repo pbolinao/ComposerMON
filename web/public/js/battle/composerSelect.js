@@ -146,33 +146,48 @@ function chosenReselect(boxNum) {
 }
 
 function readyClick() {
-    ourTeamDiv.style.animation = 'glow-hover 0.75s ease-in-out infinite alternate';
-    fetch(httpServerURL + "/createTeam", {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'authorization': 'JWT '+ window.localStorage.getItem('token')
-        },
-        body: JSON.stringify({
-            teamID: teamID,
-            composer1: composerTeamNames[0], composer1Id: composerTeamIDs[0],
-            composer2: composerTeamNames[1], composer2Id: composerTeamIDs[1],
-            composer3: composerTeamNames[2], composer3Id: composerTeamIDs[2]
-        })
-    }).then(response => response.json())
-    .then(data => {
-        console.log(data);
-        ws.send(JSON.stringify({
-            meta: "ready",
-            teamID: teamID,
-            enemyTeamID: enemyTeamID
-        }));
-        ready = true;
-        readyCheck();
-    }).catch(e => {
-        console.log(e)
-    });
+    let goodToGo = true;
+    for (let i = 0; i < 3; i++) {
+        if (!currentlySelected[i]) {
+            goodToGo = false;
+        }
+    }
+    if (goodToGo) {
+        ourTeamDiv.style.animation = 'glow-hover 0.75s ease-in-out infinite alternate';
+        fetch(httpServerURL + "/createTeam", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'authorization': 'JWT '+ window.localStorage.getItem('token')
+            },
+            body: JSON.stringify({
+                teamID: teamID,
+                composer1: composerTeamNames[0], composer1Id: composerTeamIDs[0],
+                composer2: composerTeamNames[1], composer2Id: composerTeamIDs[1],
+                composer3: composerTeamNames[2], composer3Id: composerTeamIDs[2]
+            })
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data);
+            playerTeam = [
+                {id: composerTeamIDs[0], name: composerTeamNames[0]},
+                {id: composerTeamIDs[1], name: composerTeamNames[1]},
+                {id: composerTeamIDs[2], name: composerTeamNames[2]}
+            ]
+            ws.send(JSON.stringify({
+                meta: "ready",
+                teamID: teamID,
+                enemyTeamID: enemyTeamID
+            }));
+            ready = true;
+            readyCheck();
+        }).catch(e => {
+            console.log(e)
+        });
+    } else {
+        window.alert("You must pick 3 composers!");
+    }
 }
 
 function startBattle() {

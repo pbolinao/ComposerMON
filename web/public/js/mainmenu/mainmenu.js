@@ -105,7 +105,7 @@ ws.addEventListener("message", message => {
         console.log(msg);
         roomInfo = JSON.parse(msg);
         localStorage.setItem('roomID', roomInfo.roomID);
-        localStorage.setItem('roomInfo', roomInfo);
+        localStorage.setItem('roomInfo', JSON.stringify(roomInfo));
         window.location.assign('./battle/index.html');
     } else if (indicator == '-') {
         // not enough players
@@ -165,8 +165,8 @@ function joinRoomOverlay(roomInfo) {
     p2User.style.color = "#0000ff";
     document.getElementById("room-pot-count").innerHTML = roomInfo.potCount;
     document.getElementById("room-mpot-count").innerHTML = roomInfo.mPotCount;
-    document.getElementById("room-rev-count").innerHTML = roomInfo.revCount;
-    document.getElementById("room-mrev-count").innerHTML = roomInfo.mRevCount;
+    // document.getElementById("room-rev-count").innerHTML = roomInfo.revCount;
+    // document.getElementById("room-mrev-count").innerHTML = roomInfo.mRevCount;
 }
 
 function leaveRoomOverlay() {
@@ -180,8 +180,8 @@ function leaveRoomOverlay() {
     p2User.style.color = "#000000";
     document.getElementById("room-pot-count").innerHTML = '';
     document.getElementById("room-mpot-count").innerHTML = '';
-    document.getElementById("room-rev-count").innerHTML = '';
-    document.getElementById("room-mrev-count").innerHTML = '';
+    // document.getElementById("room-rev-count").innerHTML = '';
+    // document.getElementById("room-mrev-count").innerHTML = '';
 
     document.getElementById(serverDisplayID).style.display = "flex";
     document.getElementById(serverLabelID).style.display = "inline";

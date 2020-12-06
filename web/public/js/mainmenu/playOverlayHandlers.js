@@ -2,9 +2,9 @@ let playerName = null,
     reqPassword = false,
     // compCount = 3,
     potCount = 0,
-    mPotCount = 0,
-    revCount = 0,
-    mRevCount = 0;
+    mPotCount = 0;
+    // revCount = 0,
+    // mRevCount = 0;
 
 // ------- ROOM CREATED STUFF
 function createRoom() {
@@ -27,8 +27,8 @@ function createRoom() {
             password: password,
             potCount: potCount,
             mPotCount: mPotCount,
-            revCount: revCount,
-            mRevCount: mRevCount
+            // revCount: revCount,
+            // mRevCount: mRevCount
         }
         fetch(httpServerURL + "/createRoom", {
             method: 'POST',
@@ -63,13 +63,6 @@ function startGame() {
         meta: 'start',
         room: currentRoomToJoin.roomID
     }));
-    // check if there is a player 2 first...
-    // if not maybe have the person play a computer?
-    // somehow check if the user is the host lol 
-    // (maybe store the host name in the room lol or lock the button if they joined from main menu and not create)
-    // somehow gotta get the specific player to also be pushed towards the game........
-    // window.location.replace('./battle/index.html'); // USE REPLACE ON THE LIVE SITE (replace has no history)
-    // window.location.assign('./battle/index.html') // USE THIS ON mainmenu.js
 }
 
 // ------- ROOM CREATED STUFF ^^^^^
@@ -98,8 +91,8 @@ function hostCreatedJoin(roomInfo) {
         p1User.style.color = "#ff0000";
         document.getElementById("room-pot-count").innerHTML = roomInfo.potCount;
         document.getElementById("room-mpot-count").innerHTML = roomInfo.mPotCount;
-        document.getElementById("room-rev-count").innerHTML = roomInfo.revCount;
-        document.getElementById("room-mrev-count").innerHTML = roomInfo.mRevCount;
+        // document.getElementById("room-rev-count").innerHTML = roomInfo.revCount;
+        // document.getElementById("room-mrev-count").innerHTML = roomInfo.mRevCount;
         let startGameBTN = document.getElementById("start-game-btn");
         startGameBTN.style.color = "#000000";
         startGameBTN.style.pointerEvents = "auto";
@@ -176,10 +169,10 @@ function privateRoomSelect() {
     }
 }
 
-function composerCountSliderChange() {
-    compCount = document.getElementById('composer-count-slider').value;
-    document.getElementById('composer-count').innerHTML = compCount;
-}
+// function composerCountSliderChange() {
+//     compCount = document.getElementById('composer-count-slider').value;
+//     document.getElementById('composer-count').innerHTML = compCount;
+// }
 
 function potSliderInput() {
     potCount = document.getElementById('pot-slider').value;
@@ -189,14 +182,14 @@ function mPotSliderInput() {
     mPotCount = document.getElementById('mpot-slider').value;
     document.getElementById('mpot-count').innerHTML = mPotCount;
 }
-function revSliderInput() {
-    revCount = document.getElementById('rev-slider').value;
-    document.getElementById('rev-count').innerHTML = revCount;
-}
-function mRevSliderInput() {
-    mRevCount = document.getElementById('mrev-slider').value;
-    document.getElementById('mrev-count').innerHTML = mRevCount;
-}
+// function revSliderInput() {
+//     revCount = document.getElementById('rev-slider').value;
+//     document.getElementById('rev-count').innerHTML = revCount;
+// }
+// function mRevSliderInput() {
+//     mRevCount = document.getElementById('mrev-slider').value;
+//     document.getElementById('mrev-count').innerHTML = mRevCount;
+// }
 // ----------- END CREATE ROOM HANDLERS
 
 

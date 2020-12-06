@@ -18,6 +18,25 @@ function getAllTeams(req, res) {
     };
 };
 
+function getTeam(req, res) {
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
+        jwt.verify(req.headers.authorization.split(' ')[1], "DSAFFA$W#FA$F%@143fWEf3f", (err, decode) => {
+            if (err) {
+                return res.status(401).json({message: 'Unauthorized user'});
+            } else {
+                let team = req.params.teamID;
+                let teams = teamsModel.getTeam(team);
+
+                teams.then( ([data, meta]) => {
+                    res.status(200).json(data);
+                });
+            };
+        });
+    } else {
+        return res.status(401).json({message: 'Unauthorized user'});
+    };
+}
+
 function createTeam(req, res) {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
         jwt.verify(req.headers.authorization.split(' ')[1], "DSAFFA$W#FA$F%@143fWEf3f", (err, decode) => {
@@ -62,6 +81,10 @@ function deleteTeam(req, res) {
     };
 };
 
+function deleteTeamNoRes(id) {
+    teamsModel.deleteTeam(id);
+}
+
 function getCreatorsTeams() {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
         jwt.verify(req.headers.authorization.split(' ')[1], "DSAFFA$W#FA$F%@143fWEf3f", (err, decode) => {
@@ -82,7 +105,9 @@ function getCreatorsTeams() {
 
 module.exports = {
     getAllTeams: getAllTeams,
+    getTeam: getTeam,
     createTeam: createTeam,
     deleteTeam: deleteTeam,
+    deleteTeamNoRes: deleteTeamNoRes,
     getCreatorsTeams: getCreatorsTeams
 };

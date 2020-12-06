@@ -4,6 +4,11 @@ function getComposers() {
     return db.execute("SELECT * FROM `composers`;");
 };
 
+function getComposer(composerID) {
+    return db.execute(`SELECT * FROM \`composers\` WHERE \`ID\` = '${composerID}';`)
+}
+
 module.exports = {
-    getComposers: getComposers
+    getComposers: getComposers,
+    getComposer: getComposer
 };

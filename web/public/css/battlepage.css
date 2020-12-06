@@ -15,25 +15,23 @@ progress { /* progress bar */
     height: 1.25em;
     border: 2px solid black;
     border-radius: 16px;
-  }
-  progress::-webkit-progress-bar { /* progress bar */
+}
+progress::-webkit-progress-bar { /* progress bar */
     border-radius: 16px;
-  }
-  progress::-webkit-progress-value { /* progress bar VALUE */
+}
+progress::-webkit-progress-value { /* progress bar VALUE */
     color: green;
     border-radius: 8px;
-  }
-  progress::-moz-progress-bar { /* progress bar VALUE (firefox) */
+}
+progress::-moz-progress-bar { /* progress bar VALUE (firefox) */
     color: green;
     border-radius: 8px;
-  }
-progress {
 }
 .b-composermon-info div {
     width: 100%;
     text-align: center;
 }
-#b-enemy-composermon, #b-our-composermon {
+#b-enemy-composermon, #b-player-composermon {
     margin-bottom: 0;
 }
 
@@ -93,7 +91,7 @@ progress {
 #player-attacks, #player-quit-prompt, #player-swap-composer, #player-bag {
     display: none;
 }
-#player-attacks h2, #player-swap-composer h2, #player-bag h2 {
+#player-attacks h2, #player-swap-composer h3, #player-bag h2 {
     font-size: 20pt;
 }
 #player-bag h3 {
@@ -102,6 +100,7 @@ progress {
 }
 
 #player-right-cont {
+    pointer-events: none;
     height: 100%;
     width: 35%;
     border-left: 4px solid black;
@@ -137,7 +136,7 @@ progress {
     justify-content: space-evenly;
 }
 
-.player-select h2:hover, #player-swap-composer h2:hover, #player-quit-confirm h2:hover, #player-select-back h2:hover {
+.player-select h2:hover, #player-swap-composer h3:hover, #player-quit-confirm h2:hover, #player-select-back h2:hover {
     cursor: pointer;
     -webkit-animation: glow-select 0.75s ease-in-out infinite alternate;
     -moz-animation: glow-select 0.75s ease-in-out infinite alternate;
@@ -151,4 +150,22 @@ progress {
     to {
         text-shadow: 0 0 20px #616161, 0 0 30px #4649ff, 0 0 40px #4652ff, 0 0 50px #4649ff, 0 0 60px #4659ff;
     }
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.battle-img {
+    animation-iteration-count: infinite;
 }

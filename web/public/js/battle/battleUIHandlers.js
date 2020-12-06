@@ -54,6 +54,22 @@ function swapMainText(focus, i, x, y, z, rightHide1, rightHide2, rightShow) {
     rightShow.style.display = "flex"
 }
 
+function backToMainInfo() {
+    // Main (right side) buttons
+    let mainBox = document.getElementById("player-selection-main"),
+        backBox = document.getElementById("player-select-back"),
+        quitBox = document.getElementById("player-quit-confirm");
+    
+    // Displays to hide/show
+    let infoPopup = document.getElementById("player-text-info"),
+        attacksPopup = document.getElementById("player-attacks"),
+        bagPopup = document.getElementById("player-bag"),
+        swapPopup = document.getElementById("player-swap-composer"),
+        quitPopup = document.getElementById("player-quit-prompt");
+    swapMainText(infoPopup, attacksPopup, bagPopup, swapPopup, quitPopup, backBox, quitBox, mainBox);
+}
+
 function quitGame() {
     console.log("game quit")
+    endGame('quit');
 }

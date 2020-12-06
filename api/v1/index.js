@@ -52,8 +52,6 @@ app.delete("/deleteTeam", teamsController.deleteTeam);
 
 app.put("/makeTurn", gameController.makeTurn);
 
-app.post("/createGameState", gameController.createGameState)
-
 app.get("/composers", composersController.getAllComposers);
 
 app.get("/attacksAndBuffs", attacksAndBuffsController.getAllAttacksAndBuffs);
@@ -67,6 +65,10 @@ app.get("/currentGameState", gameController.getCurrentGameState);
 app.get("/recentMatches", gameController.getRecentMatches);
 
 app.get("/getTeams", teamsController.getAllTeams);
+
+app.get("/getTeam/:teamID", teamsController.getTeam);
+
+app.get("/getComposer/:composer", composersController.getComposer);
 
 app.get("/getRooms", roomController.getCurrentRooms);
 
@@ -86,6 +88,7 @@ let rooms = {};
 
 let webSocketsBattle = {};
 let battleRooms = {};
+let bRoomsTurns = {}
 
 wss.on("connection", ws => {
     let userID = getUniqueClientID();
@@ -227,15 +230,18 @@ wssBattle.on("connection", ws => {
     ws.id = userID;
     webSocketsBattle[userID] = ws;
     console.log("New client connected! User: " + userID);
+    let teamID;
+    let enemyTeamID;
 
     ws.on("message", data => {
         data = JSON.parse(data);
         let roomID = data.roomID;
-        let teamID = data.teamID;
-        let enemyTeamID = data.enemyTeamID;
 
         if (data.meta == 'connected') {
+            teamID = data.teamID;
             battleRooms[teamID] = ws;
+            enemyTeamID = data.enemyTeamID;
+            bRoomsTurns[roomID] = [];
         } else if (data.meta == 'team-update') {
             let enemyWS = battleRooms[enemyTeamID];
             let tUpdate = {
@@ -246,13 +252,116 @@ wssBattle.on("connection", ws => {
         } else if (data.meta == 'ready') {
             let enemyWS = battleRooms[enemyTeamID];
             enemyWS.send('opponent-ready');
+        } else if (data.meta == 'atk' || data.meta == 'item' || data.meta == 'swap') {
+            let arr = bRoomsTurns[roomID];
+            arr.push(data);
+            if (arr.length == 2) {
+                let turn = JSON.stringify(battleTurn(arr));
+
+                // send turn to both players
+                let enemyWS = battleRooms[enemyTeamID];
+                ws.send("m" + turn);
+                enemyWS.send("m" + turn);
+                bRoomsTurns[roomID] = [];
+            }
+        } else if (data.meta == 'quit') {
+            console.log('enemy quit');
+            let enemyWS = battleRooms[enemyTeamID];
+            enemyWS.send('enemy-quit');
         }
     })
 
     ws.on("close", () => {
+        teamsController.deleteTeamNoRes(teamID);
         console.log("Client " + userID + " disconnected.");
     })
 });
+
+function battleTurn(data) {
+    let first = data[0];
+    let second = data[1];
+
+    let state = 0;
+
+    let move = {}
+
+    // check for a swap FIRST
+    if (first.meta == 'swap') {
+        move[state] = {
+            meta: 'swap',
+            player: first.player,
+            swapVal: first.swap
+        };
+        state++;
+    }
+    if (second.meta == 'swap') {
+        move[state] = {
+            meta: 'swap',
+            player: second.player,
+            swapVal: second.swap
+        };
+        state++;
+    }
+
+    if (first.meta == 'atk') {
+        let attack = first.atk;
+
+        let damage = Math.floor(attack.Damage * (Math.random() + 0.5));
+
+        move[state] = {
+            meta: 'atk',
+            player: first.player,
+            current: first.current,
+            attack: attack,
+            damage: damage
+        };
+        state++;
+    } else if (first.meta == 'item') {
+        let healAmount = 0;
+        if (first.itemID == 1) {
+            healAmount = 30;
+        } else if (first.itemID == 2) {
+            healAmount = 100;
+        }
+        move[state] = {
+            meta: 'item',
+            player: first.player,
+            current: first.current,
+            healAmount: healAmount
+        };
+        state++;
+    }
+
+    if (second.meta == 'atk') {
+        let attack = second.atk;
+
+        let damage = Math.floor(attack.Damage * (Math.random() + 0.5));
+
+        move[state] = {
+            meta: 'atk',
+            player: second.player,
+            current: second.current,
+            attack: attack,
+            damage: damage
+        };
+        state++;
+    } else if (second.meta == 'item') {
+        let healAmount = 0;
+        if (second.itemID == 1) {
+            healAmount = 30;
+        } else if (second.itemID == 2) {
+            healAmount = 100;
+        }
+        move[state] = {
+            meta: 'item',
+            player: second.player,
+            current: second.current,
+            healAmount: healAmount
+        };
+        state++;
+    }
+    return move;
+}
 
 function getUniqueClientID() {
     function s4() {

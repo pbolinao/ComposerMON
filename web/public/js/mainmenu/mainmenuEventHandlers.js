@@ -1,7 +1,7 @@
 let playOverlay,
     recentOverlay,
     aboutOverlay,
-    mmItems
+    mmItems;
 
 function establishMMHandlers() {
     playOverlay = document.getElementById(playOverlayID);

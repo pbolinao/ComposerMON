@@ -1,0 +1,24 @@
+
+#end-container {
+    display: none;
+    background-image: radial-gradient(circle at bottom, #1b3e53f4 10%, #810c0cf4);
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    text-align: center;
+    opacity: 1;
+    -webkit-transition: opacity 0.5s linear;
+    transition: opacity 0.5s linear;
+}
+
+#end-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#home-btn:hover {
+    color: white;
+    cursor: pointer;
+}

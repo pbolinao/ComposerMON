@@ -1,0 +1,403 @@
+swagger: "2.0"
+info:
+  description: "This is an API for gathering information on composermons. It has been put to use at the official game for the API here: xxxxxxxxxxxxx"
+  version: "1.0.0"
+  title: "Composermon"
+host: "www.jamesp.ca"
+basePath: "/api/v1"
+tags:
+- name: "authorization"
+  description: "API authorization"
+- name: "rooms"
+  description: "Access to room operations"
+- name: "teams"
+  description: "Access to team operations"
+- name: "game"
+  description: "Access to game operations"
+- name: "composers"
+  description: "Access to the games characters"
+- name: "attacks and buffs"
+  description: "Access to the game character's moves"
+- name: "items"
+  description: "Access to the items of the game"
+schemes:
+- "https"
+paths:
+  /getToken:
+    post:
+      tags:
+      - "authorization"
+      summary: "Get an authorization JSON web token"
+      description: "Call this endpoint to get an authorization JSON web token."
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+  /createRoom:
+    post:
+      tags:
+      - "rooms"
+      summary: "Creates a room for composermon to battle in"
+      description: "Will create a room on the server for composermon to battle in."
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /createTeam:
+    post:
+      tags:
+      - "teams"
+      summary: "Create a composermon team"
+      description: "Creates a team of 3 composermon."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body contents"
+        in: "body"
+        description: "Tags to filter by"
+        required: true
+        schema:
+          $ref: "#/definitions/Team"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /getEndGame:
+    post:
+      tags:
+      - "game"
+      summary: "Gets the end of game results"
+      description: "Gets the results of the end of game including the names of both players and the winner."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /createGameState:
+    post:
+      tags:
+      - "game"
+      summary: "Create a new game state"
+      description: "Creates a new game state containing the player names, composermon living statuses, and game id."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body contents"
+        in: "body"
+        description: "Values to create game state."
+        required: true
+        schema:
+          $ref: "#/definitions/NewGameState"
+      responses:
+        "201":
+          description: "content created"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /deleteTeam:
+    delete:
+      tags:
+      - "teams"
+      summary: "Delete a team"
+      description: "Deletes a team from the team database."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body contents"
+        in: "body"
+        description: "Id to filter by."
+        required: true
+        schema:
+          $ref: "#/definitions/DeleteTeam"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /makeTurn:
+    put:
+      tags:
+      - "game"
+      summary: "Updates the current game state"
+      description: "Update the current game state, changing living status if a composermon faints."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body contents"
+        in: "body"
+        description: "Statuses of composermon life."
+        required: true
+        schema:
+          $ref: "#/definitions/Turn"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /composers:
+    get:
+      tags:
+      - "composers"
+      summary: "Returns all available composers"
+      description: "Returns a list of all available composers."
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /attacksAndBuffs:
+    get:
+      tags:
+      - "attacks and buffs"
+      summary: "Returns all attacks and buffs"
+      description: "Returns a list of all attacks and buffs and their effects."
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /items:
+    get:
+      tags:
+      - "items"
+      summary: "Returns items in the game"
+      description: "Returns a list of all items in the game and their effects."
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /creatorsTeams:
+    get:
+      tags:
+        - "teams"
+      summary: "Returns the creators preferred teams"
+      description: "Returns a list of all of the preferred teams of the creators including the composermons names and ids."
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /currentGameState:
+    get:
+      tags:
+      - "game"
+      summary: "Returns the current game state"
+      description: "Returns an object of the current game state."
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /recentMatches:
+    get:
+      tags:
+      - "game"
+      summary: "Returns the last 5 matches"
+      description: "Returns a list of the last 5 matches including the player names and the winners."
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /getTeams:
+    get:
+      tags:
+      - "teams"
+      summary: "Returns a list of all teams"
+      description: "Returns a list of all currently active user teams and the creators teams."
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /getRooms:
+    get:
+      tags:
+      - "rooms"
+      summary: "Returns a list of current rooms"
+      description: "Returns a list of all currently active rooms."
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /getTeam/{teamID}:
+    get:
+      tags:
+      - "teams"
+      summary: "Find a team by team ID"
+      description: "Returns a single team of composermon."
+      produces:
+      - "application/json"
+      parameters:
+      - name: "teamID"
+        in: "path"
+        description: "ID of the team to return."
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+  /getComposer/{composer}:
+    get:
+      tags:
+      - "composers"
+      summary: "Find a composer by the composer ID"
+      description: "Returns a single composer."
+      produces:
+      - "application/json"
+      parameters:
+      - name: "composer"
+        in: "path"
+        description: "ID of the composer to return."
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+        "401":
+          description: "unauthorized user"
+      security:
+      - authorization: []
+securityDefinitions:
+  authorization:
+    type: "basic"
+definitions:
+  Team:
+    type: "object"
+    properties:
+      teamID:
+        type: "integer"
+        format: "int64"
+      composer1:
+        type: "string"
+      composer1Id:
+        type: "integer"
+        format: "int64"
+      composer2:
+        type: "string"
+      composer2Id:
+        type: "integer"
+        format: "int64"
+      composer3:
+        type: "string"
+      composer3Id:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "Team"
+  NewGameState:
+    type: "object"
+    properties:
+      gameID:
+        type: "integer"
+        format: "int64"
+      player1:
+        type: "string"
+      player2:
+        type: "string"
+    xml:
+      name: "Team"
+  DeleteTeam:
+    type: "object"
+    properties:
+      teamID:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "DeleteTeam"
+  Turn:
+    type: "object"
+    properties:
+      gameID:
+        type: "integer"
+        format: "int64"
+      p1_c1:
+        type: "integer"
+        format: "tinyint"
+      p1_c2:
+        type: "integer"
+        format: "tinyint"
+      p1_c3:
+        type: "integer"
+        format: "tinyint"
+      p2_c1:
+        type: "integer"
+        format: "tinyint"
+      p2_c2:
+        type: "integer"
+        format: "tinyint"
+      p2_c3:
+        type: "integer"
+        format: "tinyint"
+    xml:
+      name: "Turn"
