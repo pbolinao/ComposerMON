@@ -85,7 +85,7 @@ function deleteTeamNoRes(id) {
     teamsModel.deleteTeam(id);
 }
 
-function getCreatorsTeams() {
+function getCreatorsTeams(req, res) {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
         jwt.verify(req.headers.authorization.split(' ')[1], "DSAFFA$W#FA$F%@143fWEf3f", (err, decode) => {
             if (err) {

@@ -73,6 +73,11 @@ function setupComposerSelect() {
         selectionBox = selectionBoxes[i];
         selectionBox.addEventListener('click', function() { chosenReselect(i) });
     }
+
+    document.getElementById('creators-pick-1').addEventListener("click", function() { creatorsPick(0); });
+    document.getElementById('creators-pick-2').addEventListener("click", function() { creatorsPick(1); });
+    document.getElementById('creators-pick-3').addEventListener("click", function() { creatorsPick(2); });
+    document.getElementById('creators-pick-4').addEventListener("click", function() { creatorsPick(3); });
 }
 
 function composerHover(hoverID) {
@@ -190,6 +195,51 @@ function readyClick() {
     }
 }
 
-function startBattle() {
-    
+
+function creatorsPick(pick) {
+    fetch(httpServerURL + '/creatorsTeams', {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'authorization': 'JWT '+ window.localStorage.getItem('token')
+        }
+    }).then(response => response.json())
+    .then(data => {
+        console.log(data);
+        let pickedTeam = data[pick];
+
+        let composer1 = composersList[pickedTeam.Composer_1_ID - 1];
+        let composer2 = composersList[pickedTeam.Composer_2_ID - 1];
+        let composer3 = composersList[pickedTeam.Composer_3_ID - 1];
+        current = 0;
+        for (let i = 0; i < 3; i++) {
+            imgID = selectImageIDList[i];
+            nameID = selectNameIDList[i];
+            let composer;
+            if (i == 0) {
+                composer = composer1;
+            } else if (i == 1) {
+                composer = composer2;
+            } else if (i == 2) {
+                composer = composer3
+            }
+            document.getElementById(imgID).src = composer.Image;
+            document.getElementById(bsImageIDList1[i]).src = composer.Image;
+            document.getElementById(nameID).innerHTML = composer.Name;
+            document.getElementById(bsNameIDList1[i]).innerHTML = composer.Name;
+            currentlySelected[i] = true;
+            composerTeamIDs[i] = composer.ID;
+            composerTeamNames[i] = composer.Name;
+            ws.send(JSON.stringify({
+                meta: "team-update",
+                teamID: teamID,
+                enemyTeamID: enemyTeamID,
+                position: i,
+                composerID: composer.ID
+            }))
+            current++;
+        }
+    }).catch(e => {
+        console.log(e)
+    });
 }

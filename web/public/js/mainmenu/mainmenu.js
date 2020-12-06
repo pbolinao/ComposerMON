@@ -1,6 +1,8 @@
 // This file handles the main Main Menu functions
 // Websocket, server handling stuff, creating elements as a response to server stuff
 
+// const httpServerURL = "https://jamesp.ca/composermon/api/v1";
+// const wsServerURL = "wss://jamesp.ca/composermon/api/v1:8082";
 const httpServerURL = "http://localhost:4000";
 const wsServerURL = "ws://localhost:8082";
 
@@ -121,6 +123,22 @@ ws.addEventListener("message", message => {
 window.onload = function() {
     // Establish event handlers
     establishMMHandlers();
+    fetchRecentMatches();
+}
+
+function fetchRecentMatches() {
+    fetch(httpServerURL + '/recentMatches', {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'authorization': 'JWT '+ window.localStorage.getItem('token')
+        }
+    }).then(response => response.json())
+    .then(data => {
+        console.log(data);
+    }).catch(e => {
+        console.log(e)
+    });
 }
 
 function getNewRoom(roomObj) {

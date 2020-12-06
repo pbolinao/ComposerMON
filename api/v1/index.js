@@ -1,6 +1,6 @@
 let express = require('express');
 let https = require('https');
-let cors = require('cors')
+let cors = require('cors');
 let app = express();
 let jwt = require('jsonwebtoken');
 let WebSocket = require('ws');
@@ -30,7 +30,7 @@ app.post("/createRoom", (req, res) => {
                 let roomInfo = JSON.stringify(roomController.createRoom(req));
                 wss.clients.forEach((client) => {
                     if (client.readyState === WebSocket.OPEN) {
-                    client.send("1" + roomInfo);
+                        client.send("1" + roomInfo);
                     }
                 });
                 console.log("New Room: " + roomInfo);
@@ -47,6 +47,8 @@ app.post("/createTeam", teamsController.createTeam);
 app.post("/getEndGame", gameController.getGameEnd);
 
 app.post("/createGameState", gameController.createGameState);
+
+app.post("/setGameEnd", gameController.setGameEnd);
 
 app.delete("/deleteTeam", teamsController.deleteTeam);
 
@@ -243,12 +245,15 @@ wssBattle.on("connection", ws => {
             enemyTeamID = data.enemyTeamID;
             bRoomsTurns[roomID] = [];
         } else if (data.meta == 'team-update') {
+            enemyTeamID = data.enemyTeamID;
             let enemyWS = battleRooms[enemyTeamID];
             let tUpdate = {
                 position: data.position,
                 composerID: data.composerID
             }
-            enemyWS.send('t' + JSON.stringify(tUpdate));
+            if (enemyWS) {
+                enemyWS.send('t' + JSON.stringify(tUpdate));
+            }
         } else if (data.meta == 'ready') {
             let enemyWS = battleRooms[enemyTeamID];
             enemyWS.send('opponent-ready');
@@ -261,13 +266,17 @@ wssBattle.on("connection", ws => {
                 // send turn to both players
                 let enemyWS = battleRooms[enemyTeamID];
                 ws.send("m" + turn);
-                enemyWS.send("m" + turn);
+                if (enemyWS) {
+                    enemyWS.send("m" + turn);
+                }
                 bRoomsTurns[roomID] = [];
             }
         } else if (data.meta == 'quit') {
             console.log('enemy quit');
             let enemyWS = battleRooms[enemyTeamID];
-            enemyWS.send('enemy-quit');
+            if (enemyWS) {
+                enemyWS.send('enemy-quit');
+            }
         }
     })
 

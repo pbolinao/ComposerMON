@@ -1,4 +1,5 @@
-let gameModel = require("../models/itemsModel");
+let gameModel = require("../models/gameModel");
+let jwt = require('jsonwebtoken');
 
 function getRecentMatches(req, res) {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
@@ -91,10 +92,29 @@ function createGameState(req, res) {
     };
 }
 
+function setGameEnd(req, res) {
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT') {
+        jwt.verify(req.headers.authorization.split(' ')[1], "DSAFFA$W#FA$F%@143fWEf3f", (err, decode) => {
+            if (err) {
+                return res.status(401).json({message: 'Unauthorized user'});
+            } else {
+                let gameState = gameModel.setGameEnd(req.body.player1, req.body.player2, req.body.winner);
+
+                gameState.then( ([data, meta]) => {
+                    res.status(201).json(data);
+                });
+            };
+        });
+    } else {
+        return res.status(401).json({message: 'Unauthorized user'});
+    };
+}
+
 module.exports = {
     getRecentMatches: getRecentMatches,
     getCurrentGameState: getCurrentGameState,
     makeTurn: makeTurn,
     createGameState: createGameState,
-    getGameEnd: getGameEnd
+    getGameEnd: getGameEnd,
+    setGameEnd: setGameEnd
 };

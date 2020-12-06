@@ -3,6 +3,8 @@
 // const e = require("express");
 
 // Websocket, server handling stuff, creating elements as a response to server stuff
+// const httpServerURL = "https://jamesp.ca/composermon/api/v1";
+// const wsServerURL = "wss://jamesp.ca/composermon/api/v1:8083";
 const httpServerURL = "http://localhost:4000";
 const wsServerURL = "ws://localhost:8083";
 
