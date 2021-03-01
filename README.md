@@ -1,11 +1,10 @@
 # ComposerMON
 
-
-COMPOSERMON!
+[Click here to play!](https://composer-mon.web.app/)
 
 By Philip Bolinao and James Pike
 
-INSTRUCTIONS TO START PLAYING:
+INSTRUCTIONS TO PLAY LOCALLY:
 
 1) To start the localhost server open the './api/v1' folder in the command line and run 'npm start'
 
